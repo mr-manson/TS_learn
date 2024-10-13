@@ -1,5 +1,17 @@
-const getFullName = (firstname: string, surname: string): string => {
-	return `${firstname} ${surname}`;
+const getFullName = (userEntity: User): string => {
+	return `${userEntity.firstname} ${userEntity.surname}`;
 }
 
-console.log(getFullName('Aleh', 'Nikalaichanka'));
+interface User {
+	firstname: string,
+	surname?: string,
+	city?: string,
+	age?: number,
+};
+
+const user: User = {
+	firstname: 'Max',
+
+}
+
+console.log(getFullName(user));
