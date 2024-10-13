@@ -1,17 +1,5 @@
-const getFullName = (userEntity: User): string => {
-	return `${userEntity.firstname} ${userEntity.surname}`;
+const skills: Array<string> = ['Dev', 'DevOps'];
+
+for (const skill of skills) {
+	console.log(skill);
 }
-
-interface User {
-	firstname: string,
-	surname?: string,
-	city?: string,
-	age?: number,
-};
-
-const user: User = {
-	firstname: 'Max',
-
-}
-
-console.log(getFullName(user));

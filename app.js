@@ -1,9 +1,5 @@
 "use strict";
-const getFullName = (userEntity) => {
-    return `${userEntity.firstname} ${userEntity.surname}`;
-};
-;
-const user = {
-    firstname: 'Max',
-};
-console.log(getFullName(user));
+const skills = ['Dev', 'DevOps'];
+for (const skill of skills) {
+    console.log(skill);
+}
