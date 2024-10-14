@@ -1,5 +1,14 @@
-const skills: [number, string] = [1, 'DevOps'];
+enum StatusCode {
+	SUCCESS = 1,
+	IN_PROGRESS,
+	FAILED,
+};
 
-for (const skill of skills) {
-	console.log(skill);
+const res = {
+	status: "Платеж успешен",
+	statusCode: StatusCode.SUCCESS,
+};
+
+if (res.statusCode === StatusCode.SUCCESS) {
+	console.log(res);
 }
