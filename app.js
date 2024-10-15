@@ -1,15 +1,32 @@
 "use strict";
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["SUCCESS"] = 1] = "SUCCESS";
-    StatusCode[StatusCode["IN_PROGRESS"] = 2] = "IN_PROGRESS";
-    StatusCode[StatusCode["FAILED"] = 3] = "FAILED";
-})(StatusCode || (StatusCode = {}));
-;
-const res = {
-    status: "Платеж успешен",
-    statusCode: StatusCode.SUCCESS,
+const logId = (id) => {
+    if (typeof id === "string") {
+        console.log(id);
+    }
+    else if (typeof id === "number") {
+        console.log(id);
+    }
+    else {
+        console.log(id);
+    }
 };
-if (res.statusCode === StatusCode.SUCCESS) {
-    console.log(res);
-}
+const logError = (err) => {
+    if (Array.isArray(err)) {
+        console.log(err);
+    }
+    else {
+        console.log(err);
+    }
+};
+const logObj = (obj) => {
+    if ('a' in obj) {
+        console.log(obj.a);
+    }
+    else {
+        console.log(obj.b);
+    }
+};
+const a = [1, 2, 3];
+const b = [1, 2, 3];
+const c = a.concat(b);
+console.log(c);

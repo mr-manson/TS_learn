@@ -1,14 +1,25 @@
-enum StatusCode {
-	SUCCESS = 1,
-	IN_PROGRESS,
-	FAILED,
+const logId = (id: string | number | boolean) => {
+	if (typeof id === "string") {
+		console.log(id);
+	} else if (typeof id === "number") {
+		console.log(id);
+	} else {
+		console.log(id);
+	}
 };
 
-const res = {
-	status: "Платеж успешен",
-	statusCode: StatusCode.SUCCESS,
+const logError = (err: string | string[]) => {
+	if (Array.isArray(err)) {
+		console.log(err);
+	} else {
+		console.log(err);
+	}
 };
 
-if (res.statusCode === StatusCode.SUCCESS) {
-	console.log(res);
-}
+const logObj = (obj: {a: number} | {b: number}) => {
+	if ('a' in obj) {
+		console.log(obj.a);
+	} else {
+		console.log(obj.b);
+	}
+};
