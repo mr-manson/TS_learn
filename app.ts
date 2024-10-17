@@ -4,8 +4,11 @@ interface User {
 	skills: string[],
 }
 
-interface UserWithRole extends User{
+interface Role {
 	id: number,
+}
+
+interface UserWithRole extends User, Role {
 }
 
 let user: UserWithRole = {
