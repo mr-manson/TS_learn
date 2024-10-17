@@ -10,7 +10,7 @@ interface Role {
 	id: number,
 }
 
-type Role2 = {
+type role2 = {
 	id: number,
 }
 
@@ -28,7 +28,10 @@ let user: UserWithRole = {
 	}
 }
 
-//интерфейс-словарь, сегодня не используется т.к. есть Records
+//интерфейс-словарь, сегодня не используется т.к. есть Record
 interface UserDic{
 	[index: number]: User
 }
+
+//Record
+type userDic2 = Record<number, User>
