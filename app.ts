@@ -1,14 +1,12 @@
-type User = {
+interface User {
 	name: string,
 	age: number,
-	skills: string[]
-};
+	skills: string[],
+}
 
-type Role = {
+interface UserWithRole extends User{
 	id: number,
-};
-
-type UserWithRole = User & Role;
+}
 
 let user: UserWithRole = {
 	name: 'Max',
