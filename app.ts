@@ -1,37 +1,25 @@
-interface User {
-	name: string,
-	age: number,
-	skills: string[],
+let input: unknown;
 
-	log: (id: number) => string,
-}
+input = 3;
+input = ['as', 'df'];
 
-interface Role {
-	id: number,
-}
-
-type role2 = {
-	id: number,
-}
-
-interface UserWithRole extends User, Role {
-}
-
-let user: UserWithRole = {
-	name: 'Max',
-	age: 40,
-	skills: ['1', '2', '3'],
-	id: 1,
-
-	log(id) {
-		return '';
+const run = (i: unknown) => {
+	if (typeof i === 'number') {
+		i++;
+	} else {
+		i
 	}
 }
 
-//интерфейс-словарь, сегодня не используется т.к. есть Record
-interface UserDic{
-	[index: number]: User
+run (input);
+
+async function getData () {
+	try{
+		await fetch('');
+	} catch (error) {
+		if (error instanceof Error){
+			console.log(error.message);
+		}
+	}
 }
 
-//Record
-type userDic2 = Record<number, User>
