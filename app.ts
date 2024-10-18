@@ -11,15 +11,26 @@ const run = (i: unknown) => {
 	}
 }
 
-run (input);
+run(input);
 
-async function getData () {
-	try{
+async function getData() {
+	try {
 		await fetch('');
 	} catch (error) {
-		if (error instanceof Error){
+		if (error instanceof Error) {
 			console.log(error.message);
 		}
 	}
 }
 
+async function getDataForce() {
+	try {
+		await fetch('');
+	} catch (error) {
+		const e = error as Error; // явное приведение не желательно
+		console.log(e.message);
+	}
+}
+
+type Union1 = unknown | number; // unknown
+type Intersection1 = unknown & number; // number
