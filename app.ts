@@ -1,36 +1,40 @@
-let input: unknown;
+function generateError(message: string): never { // функция никогда ничего не возвращает
+	throw new Error(message);
+}
 
-input = 3;
-input = ['as', 'df'];
-
-const run = (i: unknown) => {
-	if (typeof i === 'number') {
-		i++;
-	} else {
-		i
+function dumpError(): never {
+	while (true) {
 	}
 }
 
-run(input);
+function rec(): never {
+	return rec();
+}
 
-async function getData() {
-	try {
-		await fetch('');
-	} catch (error) {
-		if (error instanceof Error) {
-			console.log(error.message);
-		}
+type paymentAction = 'refund' | 'checkout' | 'reject';
+
+function processAction(action: paymentAction) {
+	switch (action) {
+		case 'refund':
+			// ....
+			break;
+		case 'checkout':
+			// ....
+			break;
+		case 'reject':
+			// ....
+			break;
+		default:
+			const _: never = action; // проверка если не все экшены обработаны
+			throw new Error('Unknown payment action');
 	}
 }
 
-async function getDataForce() {
-	try {
-		await fetch('');
-	} catch (error) {
-		const e = error as Error; // явное приведение не желательно
-		console.log(e.message);
+function isString(x: string | number): boolean {
+	if (typeof x === 'string') {
+		return true;
+	} else if (typeof x === 'number') {
+		return false;
 	}
+	generateError('asasas');
 }
-
-type Union1 = unknown | number; // unknown
-type Intersection1 = unknown & number; // number
