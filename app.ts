@@ -1,11 +1,3 @@
-let a: number = 5;
-let b: string = a.toString();
-
-let c: string = 'asdfg';
-let d: number = parseInt(c);
-
-let e: string = new String(a).valueOf();
-
 interface User {
 	name: string;
 	email: string;
@@ -23,15 +15,15 @@ interface Admin {
 	role: number
 }
 
-const admin: Admin = { //преобразование user в admin (не рекомендуется, т.к. у админа остаются лишние поля юзера)
-	...user,
-	role: 1
+function logId(id: string | number) {
+	if (isString(id)) {
+		console.log(id);
+	} else {
+		console.log(id);
+	}
 }
 
-// правильное преобразование - маппинг
-function userToAdmin(user: User): Admin {
-	return {
-		name: user.login,
-		role: 1
-	}
+// функция type guard
+function isString (x: string | number) : x is string {
+	return typeof x === 'string';
 }
