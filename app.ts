@@ -1,25 +1,36 @@
-class User {
-	name: string;
-	age: number;
+enum PaymentStatus {
+	HOLDED,
+	PROCESSED,
+	REVERSED
+}
 
-	// перезагрузка конструктора
-	constructor();
-	constructor(name: string);
-	constructor(age: number);
-	constructor(name: string, age: number);
-	constructor(ageOrName?: string | number, age?: number) {
-		if (typeof ageOrName === 'string') {
-			this.name = ageOrName;
-		} else if (typeof ageOrName === 'number') {
-			this.age = ageOrName;
+class Payment {
+	id: number;
+	status: PaymentStatus = PaymentStatus.HOLDED;
+	createdAt: Date = new Date();
+	updatedAt: Date;
+
+	constructor(id: number) {
+		this.id = id;
+		//this.createdAt = new Date();
+		//this.status = PaymentStatus.HOLDED; дефолтное значение в свойствах выше
+	}
+
+	getPaymentLifeTime(): number {
+		return new Date().getTime() - this.createdAt.getTime();
+	}
+
+	unholdPayment(): void {
+		if (this.status === PaymentStatus.PROCESSED) {
+			throw new Error('Платеж не может бюыть возвращен');
 		}
-		if (typeof age === 'number') {
-			this.age = age;
-		}
+		this.status = PaymentStatus.REVERSED;
+		this.updatedAt = new Date();
 	}
 }
 
-const user1 = new User('Вася');
-const user2 = new User();
-const user3 = new User(33);
-const user4 = new User('Вася', 33);
+const payment = new Payment(1);
+payment.unholdPayment();
+console.log(payment)
+const time = payment.getPaymentLifeTime();
+console.log(time);

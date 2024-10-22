@@ -1,32 +1,29 @@
 "use strict";
-const logId = (id) => {
-    if (typeof id === "string") {
-        console.log(id);
+var PaymentStatus;
+(function (PaymentStatus) {
+    PaymentStatus[PaymentStatus["HOLDED"] = 0] = "HOLDED";
+    PaymentStatus[PaymentStatus["PROCESSED"] = 1] = "PROCESSED";
+    PaymentStatus[PaymentStatus["REVERSED"] = 2] = "REVERSED";
+})(PaymentStatus || (PaymentStatus = {}));
+class Payment {
+    constructor(id) {
+        this.id = id;
+        this.createdAt = new Date();
+        this.status = PaymentStatus.HOLDED;
     }
-    else if (typeof id === "number") {
-        console.log(id);
+    getPaymentLifeTime() {
+        return new Date().getTime() - this.createdAt.getTime();
     }
-    else {
-        console.log(id);
+    unholdPayment() {
+        if (this.status === PaymentStatus.PROCESSED) {
+            throw new Error('Платеж не может бюыть возвращен');
+        }
+        this.status = PaymentStatus.REVERSED;
+        this.updatedAt = new Date();
     }
-};
-const logError = (err) => {
-    if (Array.isArray(err)) {
-        console.log(err);
-    }
-    else {
-        console.log(err);
-    }
-};
-const logObj = (obj) => {
-    if ('a' in obj) {
-        console.log(obj.a);
-    }
-    else {
-        console.log(obj.b);
-    }
-};
-const a = [1, 2, 3];
-const b = [1, 2, 3];
-const c = a.concat(b);
-console.log(c);
+}
+const payment = new Payment(1);
+payment.unholdPayment();
+console.log(payment);
+const time = payment.getPaymentLifeTime();
+console.log(time);
