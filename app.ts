@@ -1,16 +1,35 @@
-class User {
-	_login: string;
-	password: string;
+interface ILogger {
+	log(...args: any): void;
 
-	set login(l: string | number) {
-		this._login = 'user-' + l;
+	error(...args: any): void;
+}
+
+class Logger implements ILogger {
+	log(...args: any): void {
+		console.log(...args);
 	}
 
-	get login() {
-		return this._login
+	async error(...args: any): Promise<void> {
+		// кинуть ошибку во внешнюю систему
+		console.log(...args);
 	}
 }
 
-const user = new User();
-user.login = '123';
-console.log(user.login);
+interface IPayable {
+	pay(paymentId: number): void;
+	price?: number;
+}
+
+interface IDeletable {
+	delete(): void
+}
+
+class User implements IPayable, IDeletable {
+	pay(paymentId: number | string): void { // тип должен рабыть равен или шире интерфейса
+		/// что-то там
+	}
+
+	delete(): void {
+	}
+
+}
