@@ -1,63 +1,31 @@
-type PaymentStatus = 'new' | 'paid';
-
-class Payment {
-	id: number;
-	status: PaymentStatus = 'new';
-
-	constructor(id: number) {
-		this.id = id;
-	}
-
-	pay() {
-		this.status = 'paid';
-	}
-}
-
-class PersistedPayment extends Payment {
-	databaseId: number;
-	paidAt: Date;
-
-	constructor() {
-		const id = Math.random();
-		super(id);
-	}
-
-	save() {
-		// сохраняет в базу
-	}
-	// переопределение метода
-	override pay(date?: Date) {
-		super.pay();
-		if (date) {
-			this.paidAt = date;
-		}
-	}
-}
-
 class User {
-	name: string = 'user';
+	name: string;
 
-	constructor() {
-		console.log(this.name);
+	constructor(name: string) {
+		this.name = name;
 	}
 }
 
-class Admin extends User{
-	name: string = 'admin';
+class Users extends Array<User> { // не рекомендуется - много неподходящих методов массива
+	searchByName(name: string) {
+		return this.filter(u => u.name === name);
+	}
 
-	constructor() {
-		super(); // супер всегда вызывается самым первым, если идет обращение к свойствам класса
-		console.log(this.name);
+	override toString(): string {
+		return this.map(u => u.name).join(', ');
 	}
 }
 
-new Admin();
+const users = new Users();
+users.push(new User ('Вася'));
+users.push(new User ('Петя'));
+console.log(users.toString());
 
-class HttpError extends Error {
-	code: number;
+// лучше делать так
+class UserList {
+	users: User[];
 
-	constructor(message: string, code?: number) {
-		super(message);
-		this.code = code ?? 500;
-	}
+	push (u: User) {
+		this.users.push(u);
+	};
 }
