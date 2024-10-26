@@ -1,18 +1,15 @@
 "use strict";
-class User {
-    constructor(name) {
-        this.name = name;
+class Vehicle {
+    set model(m) {
+        this._model = m;
+    }
+    get model() {
+        return this._model;
+    }
+    addDamage(damage) {
+        this.damages.push(damage);
     }
 }
-class Users extends Array {
-    searchByName(name) {
-        return this.filter(u => u.name === name);
-    }
-    toString() {
-        return this.map(u => u.name).join(', ');
-    }
-}
-const users = new Users();
-users.push(new User('Вася'));
-users.push(new User('Петя'));
-console.log(users.toString());
+const vehicle = new Vehicle();
+vehicle.model = 'a';
+console.log(vehicle.model);

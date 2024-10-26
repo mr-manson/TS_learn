@@ -1,51 +1,35 @@
-class User {
-	name: string;
+class Vehicle {
+	public make: string;
+	private damages: string[];
+	private _model: string;
+	protected run: number;
+	#price: number; // # - приватное свойство в JS, в ТС лучше использовать private
 
-	constructor(name: string) {
-		this.name = name;
+	set model(m: string) {
+		this._model = m;
+		this.#price = 1000;
+	}
+
+	get model() {
+		this.run = 100;
+		return this._model;
+	}
+
+	addDamage(damage: string): void {
+		this.damages.push(damage);
 	}
 }
 
-class Users extends Array<User> { // не рекомендуется - получаем много лишних методов массива
-	searchByName(name: string) {
-		return this.filter(u => u.name === name);
+class EuroTrack extends Vehicle {
+	setDamage() {
+		// this.damages - error
 	}
-
-	override toString(): string {
-		return this.map(u => u.name).join(', ');
-	}
-}
-
-const users = new Users();
-users.push(new User('Вася'));
-users.push(new User('Петя'));
-console.log(users.toString());
-
-// лучше делать так
-class UserList {
-	users: User[];
-
-	push(u: User) {
-		this.users.push(u);
-	};
-}
-
-// смешивание предметной области - юзера с платежами
-class Payment {
-	date: Date;
-}
-
-class UserWithPayment extends Payment {
-	name: string;
-}
-
-// правильно так
-class UserWithPayment2 {
-	user: Users;
-	payment: Payment;
-
-	constructor(user: Users, payment: Payment) {
-		this.user = user;
-		this.payment = payment;
+	setRun(km: number) {
+		this.run = km / 0.62;
 	}
 }
+
+const vehicle = new Vehicle();
+vehicle.model = 'a';
+
+console.log(vehicle.model);
