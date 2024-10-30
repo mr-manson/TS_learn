@@ -1,20 +1,33 @@
-class UserService {
-	static db: any;
-	static async getUser(id: number) { // статический метод может быть асинхронным
-		return UserService.db.findById(id); // обращаемся не к this, а к статическому методу класса
-	}
-	create(){
-		UserService.db; // можно обратиться к статическим методам и свойствам
-	};
+class Payment {
+	private date: Date = new Date();
 
-	static {
-		// await new Promise(); // нельзя использовать асинхрон в статическом блоке
-		UserService.db = 'asdf'; // статичный блок, выполняется когда в коде появляется UserService
+	getDate(this: Payment) { // должны работать с контекстом Payment'а
+		return this.date;
+	}
+
+	getDateArrow = () => { // в стрелочной функции контекст не теряется, он всегда привязан к Payment'y
+		return this.date;
+	}
+
+}
+
+const p = new Payment();
+
+const user = {
+	id: 1,
+	paymentDate: p.getDate.bind(p),
+	paymentDateArrow: p.getDateArrow,
+}
+
+//console.log(p.getDate());
+//console.log(user.paymentDate());
+//console.log(user.paymentDateArrow());
+
+class PaymentPersistent extends Payment {
+	save() {
+		return super.getDate();
+		// super.getDateArrow работать не будет, в super можно получить обычную функцию, но не стрелочную, только если super заменить на this
 	}
 }
 
-const a = UserService.db;
-UserService.getUser(1);
-
-const inst = new UserService();
-inst.create();
+console.log(new PaymentPersistent().save());
