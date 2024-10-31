@@ -1,28 +1,15 @@
-class UserBuilder {
-	name: string;
+abstract class Controller {
+	abstract handle(req: any): void;
 
-	setName(name: string): this { //this или UserBuilder
-		this.name = name;
-		return this;
-	}
-
-	// TYPE GUARD
-	isAdmin(): this is AdminBuilder{
-		return this instanceof AdminBuilder;
+	handleWithLogs(req: any) {
+		console.log('Start');
+		this.handle(req);
+		console.log('End');
 	}
 }
 
-class AdminBuilder extends UserBuilder {
-	roles: string[];
-}
-
-const res = new UserBuilder().setName('Вася');
-const res2 = new AdminBuilder().setName('Петя'); // если в UserBuilder будет тип UserBuilder, то res2 тоже будет UsrBuilder
-
-let user: UserBuilder | AdminBuilder = new UserBuilder();
-
-if (user.isAdmin()){
-	console.log(user);
-} else {
-	console.log(user);
+class UserController extends Controller {
+	handle(req: any) {
+		console.log(req);
+	}
 }
