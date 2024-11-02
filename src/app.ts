@@ -1,15 +1,12 @@
-abstract class Controller {
-	abstract handle(req: any): void;
+const a: Array<number> = [1, 2, 3, 4, 5];
 
-	handleWithLogs(req: any) {
-		console.log('Start');
-		this.handle(req);
-		console.log('End');
-	}
+async function test (){
+	const a = await new Promise<number>((resolve, reject) => {
+		resolve (1);
+	})
 }
 
-class UserController extends Controller {
-	handle(req: any) {
-		console.log(req);
-	}
+const check: Record<string, boolean> = { //смотри раньше
+	drive: true,
+	kpp: false,
 }
