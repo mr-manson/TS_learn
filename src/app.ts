@@ -21,3 +21,4 @@ function logId <T extends string | number> (id: T): T {
 	console.log(id);
 	return id;
 }
+
