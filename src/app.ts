@@ -1,28 +1,23 @@
-function getSplitHalf<T>(data: Array<T>): Array<T> {
-	const l = data.length / 2;
-	return data.splice(0, l);
+class Vehicle {
+	run: number;
 }
 
-getSplitHalf([1, 2, 3]);
-
-// типизированная функция
-const split: <T>(data: Array<T>) => Array<T> = getSplitHalf;
-
-//===============
-
-interface ILogLine<T> {
-	timeStamp: Date;
-	data: T;
+function kmToMiles<T extends Vehicle> (vehicle: T): T {
+	vehicle.run = vehicle.run/0.62;
+	return vehicle;
 }
 
-type LogLine<T> = {
-	timeStamp: Date;
-	data: T
-};
+class LCV extends Vehicle {
+	capacity: number;
+}
 
-const logLine: ILogLine<{ a: number }> = {
-	timeStamp: new Date(),
-	data: {
-		a: 1
-	},
+const lcv = new LCV();
+lcv.run = 500;
+
+console.log(kmToMiles(lcv).run);
+
+// generic с примитивами
+function logId <T extends string | number> (id: T): T {
+	console.log(id);
+	return id;
 }
