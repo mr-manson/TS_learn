@@ -1,13 +1,12 @@
 "use strict";
-class Controller {
-    handleWithLogs(req) {
-        console.log('Start');
-        this.handle(req);
-        console.log('End');
-    }
+function logMiddleware(data) {
+    console.log(data);
+    return data;
 }
-class UserController extends Controller {
-    handle(req) {
-        console.log(req);
-    }
+const res = logMiddleware(10);
+function getSplittedHalf(data) {
+    const l = data.length / 2;
+    return data.splice(0, l);
 }
+const half = getSplittedHalf([1, 2, 3]);
+console.log(half);
