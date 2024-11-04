@@ -1,24 +1,15 @@
-class Vehicle {
-	run: number;
+class Resp<D, E> {
+	data?: D;
+	error?: E;
+
+	constructor(data?: D, error?: E) {
+		if (data) {
+			this.data = data;
+		}
+		if (error) {
+			this.error = error;
+		}
+	}
 }
 
-function kmToMiles<T extends Vehicle> (vehicle: T): T {
-	vehicle.run = vehicle.run/0.62;
-	return vehicle;
-}
-
-class LCV extends Vehicle {
-	capacity: number;
-}
-
-const lcv = new LCV();
-lcv.run = 500;
-
-console.log(kmToMiles(lcv).run);
-
-// generic с примитивами
-function logId <T extends string | number> (id: T): T {
-	console.log(id);
-	return id;
-}
-
+const res = new Resp<string, number>('data') // с одним параметром и без дженериков будет unknown
